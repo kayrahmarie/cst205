@@ -1,0 +1,479 @@
+backpack = []
+name = []
+wearingCloak = []
+
+def startGame():  #This function is the first function called to start the game
+  name.append( requestString("Hi there! What's your name?"))
+  instructions(1)
+  
+  
+def instructions(location):
+  showInformation("Hi " + name[0] + "!!! In each room, you will be told which directions you can go. \nYou will be able to go 'north', 'south', 'east', or 'west' by typing that direction. \nType 'help' to redisplay this introduction. Type 'view backpack' at anytime to view stuff in your backpack. \nType 'exit' to quit at any time")
+
+  if location == 1:
+    diagonAlley()
+  elif location ==2:
+    Olivanders()
+  elif location ==3:
+    bookShelf()
+  elif location ==4:
+    wandShelf()
+  elif location ==5:
+    Gringotts()
+  elif location ==6:
+    vault()
+  elif location ==7:
+    gringottsDesk()
+  elif location ==8:
+    forbiddenForest()
+  elif location == 9:
+    forbiddenWeb()
+  elif location ==10:
+    forbiddenTrees()
+  elif location ==11:
+    centaurVillage()
+  elif location ==12:
+    knocturnAlley()
+  elif location ==13:
+    knockturnStore()
+  elif location ==14:
+    knockturnTrunk()
+  
+def diagonAlley():
+  choice = requestString("----Welcome to Diagon Alley!----\nThere is a destination in the North, East, South, and West... choose wisely. \nWhich Direction do you choose?")
+  
+  if choice == "north" or choice == "North":
+    Olivanders()
+  elif choice == "east" or choice == "East":
+    forbiddenForest()
+  elif choice == "south" or choice == "South":
+    knockturnAlley()
+  elif choice == "west" or choice == "West":
+    Gringotts()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(1)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(1)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    diagonAlley()
+  
+
+
+
+def Olivanders():
+  choice = requestString("----Welcome to Olivanders----\nThere is a bookshelf to the North\nand another shelf to the West with a bunch of different wands.")
+  if choice == "north" or choice == "North":
+    bookShelf()
+  elif choice == "east" or choice == "East":
+    showInformation( "You just fell down a secret passage...")
+    showInformation("Falling...")
+    showInformation("Falling...")
+    showInformation("Falling...")
+    secretRoom()
+  elif choice == "south" or choice == "South":
+    diagonAlley()
+  elif choice == "west" or choice == "West":
+    wandShelf()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(2)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(2)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    Olivanders()
+
+def bookShelf():
+  choice = requestString("----Bookshelf in Olivanders----\n The book 'The Tales of Beedle the Bard' is the only book on the shelf.\nType 'pick up' to pick up the book\nOr go back south to Main Room")
+  if choice == "north" or choice == "North":
+    showInformation( "Hm.. It doesn't look like you can go that way...")
+    bookShelf()
+  elif choice == "east" or choice == "East":
+    showInformation( "Hm.. It doesn't look like you can go that way...")
+    bookShelf()
+  elif choice == "south" or choice == "South":
+    Olivanders()
+  elif choice == "west" or choice == "West":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    bookShelf()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(3)
+  elif choice == "Pick Up" or choice == "pick up":  
+    showInformation("You have picked up the book")
+    pickUp("'The Tales of Beedle the Bard'", 1)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(3)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    bookShelf()
+
+def wandShelf():
+  choice = requestString("----Wand Shelf in Olivanders---- \n There are hundreds of different wands on this shelf\nType 'buy wand' to buy a wand\nOr head back East to Main Room")
+  if choice == "north" or choice == "North":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    wandShelf()
+  elif choice == "east" or choice == "East":
+    Olivanders()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    wandShelf()
+  elif choice == "west" or choice == "West":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    wandShelf()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(4)
+  elif choice == "Buy Wand" or choice == "buy wand": 
+    index = 0
+    coin = false
+    for words in backpack:
+      if words == "coins":
+        coin = true
+        backpack.remove("coins")
+        break
+      else:
+        coin = false
+      index+=1
+    if (coin == true):
+      showInformation("Coins traded in for wand")
+      pickUp("wand", 2)
+      wandShelf()
+    else:
+      showInformation("Try again when you have coins.")
+      wandShelf()
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(4)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    wandShelf()
+
+
+
+def Gringotts():
+  choice = requestString("----Welcome to Gringotts Bank----\nThere's a goblin sitting at a desk to the North,\nThere is a vault at the end of a hallway to the West.")
+  if choice == "north" or choice == "North":
+    gringottsDesk()
+  elif choice == "east" or choice == "East":
+    diagonAlley()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    Gringotts()
+  elif choice == "west" or choice == "West":
+    vault()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(5)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(5)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    Gringotts()
+
+def vault():
+  choice = requestString("----Gringotts Vault----\nWelcome to your vault!\nBoy... I wish I had as much money as you do...\nType 'pick up' to pick up money\nOr head back east to Gringotts")
+  if choice == "north" or choice == "North":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    vault()
+  elif choice == "east" or choice == "East":
+    Gringotts()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    vault()
+  elif choice == "west" or choice == "West":
+   showInformation("Hm.. It doesn't look like you can go that way...")
+   vault()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(6)
+  elif choice == "Pick Up" or choice == "pick up": 
+    showInformation("You now have money in your backpack")
+    pickUp("coins", 3)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(6)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    vault()
+
+def gringottsDesk():
+  choice = requestString("----Griphook the Goblin's Desk----\nHe's ignoring you...\nMost Goblins have attitudes, don't take it personal.")
+  if choice == "north" or choice == "North":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    gringottsDesk()
+  elif choice == "east" or choice == "East":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    gringottsDesk()
+  elif choice == "south" or choice == "South":
+    Gringotts()
+  elif choice == "west" or choice == "West":
+    gringottsDesk()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(7)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(7)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    gringottsDesk()
+
+
+
+def forbiddenForest():
+  choice = requestString("----Forbidden Forest----\nThere are a parade of spiders heading to the North,\nAll you can see to the East are trees,\nTo the South, there are weird half human/half horse creatures.\n The forbidden forest is forbidden for a reason...")
+  if choice == "north" or choice == "North":
+    forbiddenWeb()
+  elif choice == "east" or choice == "East":
+    forbiddenTrees()
+  elif choice == "south" or choice == "South":
+    centaurVillage()
+  elif choice == "west" or choice == "West":
+    diagonAlley()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(8)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(8)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    forbiddenForest()
+
+def forbiddenWeb():
+  choice = requestString("If you go more to the north you will become spider bait.\nThere is a man behind the web sitting on a bench.\n Maybe if you were able to sneak up to spider and cast some spell on him you could get by him...")
+  if choice == "north" or choice == "North":
+    wand = false
+    cloak = false
+    for words in backpack:
+      if words == "wand":
+        wand = true
+        break
+      else:
+        wand = false
+    for word in backpack: 
+      if word == "cloak":
+        cloak = true
+        break
+      else:
+        cloak = false
+    if (wand == true): 
+     if (cloak == true):
+       showInformation("You put on the cloak snuck up to the giant spider. You then casted a spell that petrified him.")
+       dumbledore()
+    else:
+      showInformation("Congrats " + name[0] + ", you became spider bait... good thing this is a game and you have unlimited lives. You will start back at Diagon alley.")
+      diagonAlley()
+  elif choice == "east" or choice == "East":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    forbiddenWeb()
+  elif choice == "south" or choice == "South":
+    forbiddenForest()
+  elif choice == "west" or choice == "West":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    forbiddenWeb()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(9)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(9)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    forbiddenWeb()
+
+def forbiddenTrees():
+  choice = requestString("----There are so many trees----\n You can only go back to the West")
+  if choice == "north" or choice == "North":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    forbiddenTrees()
+  elif choice == "east" or choice == "East":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    forbiddenTrees()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    forbiddenTrees()
+  elif choice == "west" or choice == "West":
+    forbiddenForest()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(10)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(10)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    forbiddenTrees()
+
+def centaurVillage():
+  choice = requestString("----Centaur Village----\nThe centaurs are very worried about somthing.")
+  if choice == "north" or choice == "North":
+    forbiddenForest()
+  elif choice == "east" or choice == "East":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    centaurVillage()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    centaurVillage()
+  elif choice == "west" or choice == "West":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    centaurVillage()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(11)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(11)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    centaurVillage()
+
+
+
+def knockturnAlley():
+  choice = requestString("----Knockturn Alley----\nPeople be thinkin' yer up to no good in Knockturn Alley\nThere's a window to a store to your East\nTo your west there is a trunk that's been left open.")
+  if choice == "north" or choice == "North":
+    diagonAlley()
+  elif choice == "east" or choice == "East":
+    knockturnStore()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    knockturnAlley()
+  elif choice == "west" or choice == "West":
+    knockturnTrunk()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(12)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(12)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    knockturnAlley()
+
+def knockturnStore():
+  choice = requestString("----Knockturn Store Window----\nThere is a man and his son in the store\nWe probably don't want to know what they are up to...")
+  if choice == "north" or choice == "North":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    knockturnStore()
+  elif choice == "east" or choice == "East":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    knockturnStore()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    knockturnStore()
+  elif choice == "west" or choice == "West":
+    knockturnAlley()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(13)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(13)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    knockturnStore()
+
+def knockturnTrunk():
+  choice = requestString("----Open Trunk----\nThere is a cloak in the trunk.\nType 'pick up' if you want the cloak\nOr you can head back east for Knockturn Alley")
+  if choice == "north" or choice == "North":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    knockturnTrunk()
+  elif choice == "east" or choice == "East":
+    knockturnAlley()
+  elif choice == "south" or choice == "South":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    knockturnTrunk()
+  elif choice == "west" or choice == "West":
+    showInformation("Hm.. It doesn't look like you can go that way...")
+    knockturnTrunk()
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(14)
+  elif choice == "Pick Up" or choice == "pick up":  
+    showInformation("Why does this cloak make my arm disappear when I pick it up...")
+    pickUp("cloak", 4)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(14)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    knockturnTrunk()
+
+def dumbledore():
+  showInformation("You walk up to the white haired man sitting on the bench. He notices you and invites you to sit down.")
+  showInformation("'My name is Albus Dumbledore. I wanted to test your skills to see how ready you are for the wizarding world'")
+  showInformation("'And I wanted to say Congratulations " + name[0] + ", you are a true wizard.'")
+  showInformation( "Thank you for playing!")
+
+def secretRoom():
+  showInformation("Welcome to the secret room! There is an abundance of candy on the table in front of you. \nType 'pick up' to grab the candy\nType 'go back' to go back to Olivanders Main Room")
+  if choice == "go back" or choice == "Go Back":
+    Olivanders
+  elif choice == "pick up" or choice == "Pick Up":
+    showInformation("You have picked up the candy")
+    pickUp("Candy", 5)
+  elif choice == "exit" or choice == "Exit":
+    print "Thanks for playing"
+  elif choice == "help" or choice == "Help":
+    instructions(7)
+  elif choice == "View Backpack" or choice == "view backpack":
+    printBackpack(7)
+  else:
+    showInformation( "That is not an option... Lets try again")
+    gringottsDesk()
+
+
+
+def pickUp(item, room):
+  backpack.append(item)
+  if room == 1:
+    bookShelf()
+  elif room ==2:
+    wandShelf()
+  elif room == 3:
+    vault()
+  elif room ==4:
+    knockturnTrunk()
+  elif room == 5:
+    secretRoom()
+  
+def printBackpack(location):
+  printNow (backpack)
+  if location == 1:
+    diagonAlley()
+  elif location ==2:
+    Olivanders()
+  elif location ==3:
+    bookShelf()
+  elif location ==4:
+    wandShelf()
+  elif location ==5:
+    Gringotts()
+  elif location ==6:
+    vault()
+  elif location ==7:
+    gringottsDesk()
+  elif location ==8:
+    forbiddenForest()
+  elif location == 9:
+    forbiddenWeb()
+  elif location ==10:
+    forbiddenTrees()
+  elif location ==11:
+    centaurVillage()
+  elif location ==12:
+    knocturnAlley()
+  elif location ==13:
+    knockturnStore()
+  elif location ==14:
+    knockturnTrunk()
+  elif location == 15:
+    secretRoom()
